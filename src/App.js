@@ -5,18 +5,29 @@ import './App.css';
 import CountryListTemplate from "./modules/trevorblades-countries/country-list-template";
 import CountriesWrapper from "./modules/trevorblades-countries/countries-wrapper";
 import CountryTemplate from "./modules/trevorblades-countries/country-template";
-
+import PageTemplate from "./app/template/page-template";
+import PageNavigation from "./app/navigation/page-navigation";
 
 
 function App() {
   return (
-      <Router>
-        <div>
-          <Route exact path="/" component={Navigation}/>
-          <Route exact path="/countries" component={CompanyList} />
-          <Route exact path="/countries/:code" component={SingleCompany} />
-        </div>
-      </Router>
+      <PageTemplate>
+          <Router>
+              <div>
+                  <Route exact path="/" component={() =>
+                      <PageNavigation links={{
+                          '/': 'Navigation',
+                          '/countries': 'All countries',
+                          '/countries/AT': 'Austria info',
+                          '/countries/CL': 'Chile info',
+
+                      }}/>
+                  }/>
+                  <Route exact path="/countries" component={CompanyList} />
+                  <Route exact path="/countries/:code" component={SingleCompany} />
+              </div>
+          </Router>
+      </PageTemplate>
   )
 }
 
@@ -28,20 +39,6 @@ function CompanyList() {
           </div>}/>
       </CountriesWrapper>
   );
-}
-
-function Navigation() {
-  return (
-      <ul>
-        <li>
-          <Link to={'/countries'}>Countries</Link>
-        </li>
-        <li>
-          {/* TODO: change if required */}
-          <Link to={'/countries/:code'}>Country by code</Link>
-        </li>
-      </ul>
-    );
 }
 
 function SingleCompany({ match }) {
