@@ -4,13 +4,13 @@ import React from 'react';
 import CountryService from './contries-service.js';
 
 
-function CountryListTemplate({
+function CountryTemplate({
+   countryCode,
    CountryComponent,
-   RootComponent = ({ children }) => <div>{ children} </div>,
    PreloaderComponent = () => <div>Loading...</div>,
    ErrorComponent = ({ error }) => <div>Error: {error.message}</div>
 }) {
-  const { loading, error, data } = useQuery(CountryService.getCountriesGQL());
+  const { loading, error, data } = useQuery(CountryService.getCountryGQL(countryCode));
 
   if (loading) {
     return <PreloaderComponent/>;
@@ -21,10 +21,8 @@ function CountryListTemplate({
   }
 
   return (
-      <RootComponent>
-        {data.countries.map((country) => <CountryComponent key={country.code} country={country}/>)}
-      </RootComponent>
+      <CountryComponent country={data.country}/>
   );
 }
 
-export default CountryListTemplate;
+export default CountryTemplate;
