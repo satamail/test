@@ -10,6 +10,7 @@ import PageNavigation from "./app/navigation/page-navigation";
 import CountryGrid from "./app/counties-list/country-grid";
 import Paper from "@material-ui/core/Paper";
 import CountryView from "./app/counties-list/country-view";
+import SingleCountryView from "./app/country/single-single-country";
 
 
 function App() {
@@ -53,9 +54,7 @@ function SingleCompany({ match }) {
   return (
       <CountriesWrapper>
         <CountryTemplate countryCode={match.params.code} CountryComponent={({country}) =>
-            <div id={country.code}>
-              {JSON.stringify(country, null, 4)}>
-            </div>
+            <SingleCountryView country={country}/>
         }>
         </CountryTemplate>
       </CountriesWrapper>

@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function CountryView({country}) {
+export default function SingleCountryView({country}) {
     const classes = useStyles();
 
     return (
@@ -35,24 +35,12 @@ export default function CountryView({country}) {
                         {country.name}
                     </Typography>
                 <Typography variant="h5" component="h2">
-                    languages:
-                    <ul>
-                        {
-                            country.languages.map((language, index) =>
-                                <li key={index}>{language.name}({language.native})</li>
-                            )
-                        }
-                    </ul>
+                    currency: {country.currency}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                    Placed on {country.continent.name}
+                    Area code {country.continent.code}
                 </Typography>
             </CardContent>
-            <CardActions>
-                <Link to={`/countries/${country.code}`}>
-                    <Button size="small">Learn More</Button>
-                </Link>
-            </CardActions>
         </Card>
     );
 }

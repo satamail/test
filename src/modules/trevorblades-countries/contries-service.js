@@ -58,6 +58,7 @@ export default class CountryService {
         {
           country(code: "${countryCode}") {
             name
+            currency
             continent {
               code
             }
