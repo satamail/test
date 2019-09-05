@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import React from 'react';
 import './App.css';
@@ -7,6 +7,9 @@ import CountriesWrapper from "./modules/trevorblades-countries/countries-wrapper
 import CountryTemplate from "./modules/trevorblades-countries/country-template";
 import PageTemplate from "./app/template/page-template";
 import PageNavigation from "./app/navigation/page-navigation";
+import CountryGrid from "./app/counties-list/country-grid";
+import Paper from "@material-ui/core/Paper";
+import CountryView from "./app/counties-list/country-view";
 
 
 function App() {
@@ -33,11 +36,16 @@ function App() {
 
 function CompanyList() {
   return (
-      <CountriesWrapper>
-          <CountryListTemplate CountryComponent={({country}) => <div key={country.code}>
-            {JSON.stringify(country, null, 4)}
-          </div>}/>
-      </CountriesWrapper>
+      <Paper>
+          <CountriesWrapper>
+              <CountryListTemplate
+                  RootComponent={CountryGrid}
+                  CountryComponent={
+                      ({country}) => <CountryView key={country.code} country={country}/>
+                  }
+              />
+          </CountriesWrapper>
+      </Paper>
   );
 }
 
